@@ -26,16 +26,13 @@ public class CustomerBiz {
         String customerLastName = scanner.next();
 
         // getting customerBirthDate
-        Date customerBirthDate;
-        while (true) {
-            System.out.print("Enter customer birth date(dd/MM/yyyy): ");
-            try {
-                customerBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.next());
-                break;
-            } catch (ParseException e) {
-                System.out.println("This is invalid birthDate!");
-                System.out.println("Enter again!");
-            }
+        System.out.print("Enter customer birth date(dd/MM/yyyy): ");
+        Date customerBirthDate = null;
+        try {
+            customerBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.next());
+        } catch (ParseException e) {
+            System.out.println("This is invalid birthDate!");
+            System.out.println("Enter again!");
         }
 
         // getting customerNationality
