@@ -15,7 +15,7 @@ public class Customer {
     private String mobileNumber;
     private String address;
     private String emailAddress;
-    private List<String> nationality = new ArrayList<>();
+    private String nationality;
 
 
     // getter and setter methods
@@ -83,23 +83,18 @@ public class Customer {
         this.emailAddress = emailAddress;
     }
 
-    public List<String> getNationality() {
+    public String getNationality() {
         return nationality;
     }
 
-    public void setNationality(List<String> nationality) {
+    public void setNationality(String nationality) {
         this.nationality = nationality;
     }
 
 
-    // Add nationality
-    public void addNationality(String nationality) {
-        this.nationality.add(nationality);
-    }
-
     // constructor
     public Customer(int Id, String firsName, String lastName, Date birthDate, String nationalId,
-                    String mobileNumber, String address, String emailAddress, List<String> nationality){
+                    String mobileNumber, String address, String emailAddress, String nationality){
         this.Id = Id;
         this.firstName = firsName;
         this.lastName = lastName;
