@@ -9,12 +9,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class CustomerBiz {
+    private static int generatedCustomerId;
+
     public static void addCustomer() {
         Scanner scanner = new Scanner(System.in);
 
         // getting customerId
-        System.out.print("Enter customer id: ");
-        int customerId = Integer.parseInt(scanner.next());
+        int customerId = generateCustomerId();
 
         // getting customerFirstName
         System.out.print("Enter customer first name: ");
@@ -59,5 +60,10 @@ public class CustomerBiz {
 
         Data.customers.add(new Customer(customerId, customerFirstName, customerLastName, customerBirthDate,
                 customerNationalId, customerMobileNumber, customerAddress, customerEmailAddress, customerNationality));
+    }
+
+    public static int generateCustomerId(){
+        generatedCustomerId++;
+        return generatedCustomerId;
     }
 }

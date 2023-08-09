@@ -19,7 +19,7 @@ public class Main {
             if(choice.equalsIgnoreCase("1")){
                 CustomerBiz.addCustomer();
                 continue;
-            };
+            }
             if(choice.equalsIgnoreCase("q"))
                 break;
         }
