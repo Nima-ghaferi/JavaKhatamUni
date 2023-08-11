@@ -3,6 +3,7 @@ package biz;
 import entity.*;
 import main.Data;
 
+import java.awt.desktop.SystemEventListener;
 import java.math.BigInteger;
 import java.util.*;
 public class AccountBiz {
@@ -25,13 +26,16 @@ public class AccountBiz {
         //Get owner's ID
         System.out.print("Enter the ID of the owner of the account: ");
         //Add a "while (true)" so the user enters an ID that exists in the system
-        int ownerId;
-        while (true) {
-            ownerId = scanner.nextInt();
-            if (Customer.getIdList().contains(ownerId)) {
-                break;
-            } else {
-                System.out.print("This ID is not in the system, please enter the correct ID: ");
+        int ownerId = scanner.nextInt();
+        while(true) {
+            try {
+                if(validateId(ownerId)) {
+                    break;
+                } else {
+                    throw new Exception();
+                }
+            } catch(Exception e) {
+                System.out.print("Invalid ID, enter a valid ID: ");
                 ownerId = scanner.nextInt();
             }
         }
@@ -46,5 +50,14 @@ public class AccountBiz {
         //For BigInteger class can't use basic mathematical solutions, so we use add method and valueOf method to add 1
         generatedAccountNumber = generatedAccountNumber.add(BigInteger.valueOf(1));
         return generatedAccountNumber;
+    }
+
+    public static boolean validateId(int ownerId) {
+        for(Customer customer: Data.customers) {
+            if(customer.getId() == ownerId) {
+                return true;
+            }
+        }
+        return false;
     }
 }

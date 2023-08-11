@@ -7,7 +7,6 @@ import java.util.List;
 public class Customer {
     // fields
     private int Id;
-    private static List<Integer> IdList = new ArrayList<>();
     private String firstName;
     private String lastName;
     private  Date birthDate;
@@ -22,11 +21,6 @@ public class Customer {
     public int getId() {
         return this.Id;
     }
-
-    public static List<Integer> getIdList() {
-        return IdList;
-    }
-
     public void setId(int id) {
         this.Id = id;
     }
@@ -108,7 +102,6 @@ public class Customer {
         this.address = address;
         this.emailAddress = emailAddress;
         this.nationality = nationality;
-        IdList.add(Id);
     }
 
     public Customer(){

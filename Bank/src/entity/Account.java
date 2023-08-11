@@ -7,7 +7,8 @@ public class Account {
     private BigInteger accountNumber;
     private long balance;
     private Date openingDate;
-    private final List<Integer> customerIdList = new ArrayList<>();
+    //Customer ID list is a list of customers who have withdrawal rights to the account
+    private List<Integer> customerIdList = new ArrayList<>();
     private long minAmount;
     private int ownerId;
 
