@@ -14,7 +14,7 @@ public class Main {
             System.out.println("4.");
             System.out.println("5.");
             System.out.println("6.");
-            System.out.println("7. Quit");
+            System.out.println("q. Quit");
             System.out.println("-----------------------------");
             String choice = scanner.next();
 
@@ -23,12 +23,12 @@ public class Main {
                 continue;
             }
 
-            if(choice.equalsIgnoreCase("2")) {
+            else if(choice.equalsIgnoreCase("2")) {
                 AccountBiz.addAccount();
                 continue;
             }
 
-            if(choice.equalsIgnoreCase("q"))
+            else if(choice.equalsIgnoreCase("q"))
                 break;
         }
     }
