@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer {
-    // fields
     private int Id;
     private String firstName;
     private String lastName;
@@ -17,7 +16,6 @@ public class Customer {
     private String nationality;
 
 
-    // getter and setter methods
     public int getId() {
         return this.Id;
     }
@@ -90,7 +88,6 @@ public class Customer {
     }
 
 
-    // constructor
     public Customer(int Id, String firsName, String lastName, Date birthDate, String nationalId,
                     String mobileNumber, String address, String emailAddress, String nationality){
         this.Id = Id;

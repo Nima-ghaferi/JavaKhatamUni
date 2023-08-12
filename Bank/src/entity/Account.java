@@ -1,36 +1,42 @@
 package entity;
+import java.math.BigDecimal;
 import java.util.*;
 import java.math.BigInteger;
 
 public class Account {
-    //Fields for Account class
-    private BigInteger accountNumber;
-    private long balance;
+    private int accountId;
+    private String accountNumber;
+    private BigDecimal balance;
     private Date openingDate;
-    //Customer ID list is a list of customers who have withdrawal rights to the account
     private List<Integer> customerIdList = new ArrayList<>();
-    private long minAmount;
+    private BigDecimal minAmount;
     private int ownerId;
 
-    //Constructor to get some needed values and to create a new variable from class Account
-    public Account(BigInteger accountNumber, Date openingDate, long minAmount, int ownerId) {
+    public Account(String accountNumber, Date openingDate, BigDecimal minAmount, int ownerId, int accountId) {
         this.accountNumber = accountNumber;
         this.balance = minAmount;
         this.openingDate = openingDate;
         this.minAmount = minAmount;
         this.ownerId = ownerId;
+        this.accountId = accountId;
         customerIdList.add(ownerId);
     }
 
-    //Empty constructor
     public Account() {}
 
-    //setters and getters
-    public BigInteger getAccountNumber() {
+    public int getAccountId() {
+        return this.accountId;
+    }
+
+    public void setAccountId(int newAccountId) {
+        this.accountId = newAccountId;
+    }
+
+    public String getAccountNumber() {
         return this.accountNumber;
     }
 
-    public void setAccountNumber(BigInteger newAccountNumber) {
+    public void setAccountNumber(String newAccountNumber) {
         this.accountNumber = newAccountNumber;
     }
 
@@ -46,39 +52,19 @@ public class Account {
         return this.ownerId;
     }
 
-    public void setOwner(int newOwnerId) {
+    public void setOwnerId(int newOwnerId) {
         this.ownerId = newOwnerId;
     }
 
-    public long getBalance() {
+    public BigDecimal getBalance() {
         return this.balance;
     }
 
-    //Withdraw method to take credit out of the account
-    public void withdraw(int customerId, long withdrawalAmount) throws Exception {
-        //Customer must have to authority to withdraw money
-        if(customerIdList.contains(customerId)) {
-            //Withdrawal amount should not cause problems
-            if(this.balance - withdrawalAmount >= this.minAmount) {
-                this.balance -= withdrawalAmount;
-            } else {
-                throw new Exception("Withdrawal amount is too high");
-            }
-        } else {
-            throw new Exception("This customer does not have the authority to withdraw any amount of credit");
-        }
-    }
-
-    //Deposit method to add credit to the account
-    public void deposit(long depositAmount) {
-        this.balance += depositAmount;
-    }
-
-    public long getMinAmount() {
+    public BigDecimal getMinAmount() {
         return this.minAmount;
     }
 
-    public void setMinAmount(long minAmount) {
+    public void setMinAmount(BigDecimal minAmount) {
         this.minAmount = minAmount;
     }
 
@@ -86,25 +72,6 @@ public class Account {
         return this.customerIdList;
     }
 
-    //Add new customers to the list of customers with withdrawal rights
-    public void giveWithdrawalRights(int customerId) throws Exception {
-        //Check if the customer requested to be given withdrawal rights isn't repetitive
-        if(this.customerIdList.contains(customerId)) {
-            throw new Exception("This customer already have withdrawal rights");
-        } else {
-            this.customerIdList.add(customerId);
-        }
-    }
-
-    //Revoke a customers withdrawal rights
-    public void revokeWithdrawalRights(int customerId) throws Exception {
-        //Check if the customer requested for their withdrawal rights to be taken away are in the list
-        if(this.customerIdList.contains(customerId)) {
-            this.customerIdList.remove(customerId);
-        } else {
-            throw new Exception("This customer does not have withdrawal rights");
-        }
-    }
 
 
 }

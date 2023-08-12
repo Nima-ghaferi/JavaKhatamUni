@@ -14,18 +14,14 @@ public class CustomerBiz {
     public static void addCustomer() {
         Scanner scanner = new Scanner(System.in);
 
-        // getting customerId
         int customerId = generateCustomerId();
 
-        // getting customerFirstName
         System.out.print("Enter customer first name: ");
         String customerFirstName = scanner.next();
 
-        // getting customerLastName
         System.out.print("Enter customer last name: ");
         String customerLastName = scanner.next();
 
-        // getting customerBirthDate
         System.out.print("Enter customer birth date(dd/MM/yyyy): ");
         Date customerBirthDate = null;
         try {
@@ -35,23 +31,18 @@ public class CustomerBiz {
             System.out.println("Enter again!");
         }
 
-        // getting customerNationality
         System.out.print("Enter customer nationality: ");
         String customerNationality = scanner.next();
 
-        // getting customerNationalId
         System.out.print("Enter customer national id: ");
         String customerNationalId = scanner.next();
 
-        // getting customerMobileNumber
         System.out.print("Enter customer mobile number: ");
         String customerMobileNumber = scanner.next();
 
-        // getting customerAddress
         System.out.print("Enter customer address: ");
         String customerAddress = scanner.next();
 
-        // getting customerEmailAddress
         System.out.print("Enter customer email: ");
         String customerEmailAddress = scanner.next();
 
