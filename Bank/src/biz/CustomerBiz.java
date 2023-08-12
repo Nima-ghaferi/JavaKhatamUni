@@ -50,6 +50,15 @@ public class CustomerBiz {
                 customerNationalId, customerMobileNumber, customerAddress, customerEmailAddress, customerNationality));
     }
 
+    public static Customer findCustomerById(int customerId) {
+        for(Customer customer: Data.customers) {
+            if (customer.getId() == customerId) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
     public static int generateCustomerId(){
         generatedCustomerId++;
         return generatedCustomerId;

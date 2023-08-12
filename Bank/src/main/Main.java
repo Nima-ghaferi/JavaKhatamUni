@@ -4,7 +4,7 @@ import biz.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         while(true){
             System.out.println("What do you want to do: ");
@@ -20,16 +20,18 @@ public class Main {
 
             if(choice.equalsIgnoreCase("1")){
                 CustomerBiz.addCustomer();
-                continue;
             }
 
             else if(choice.equalsIgnoreCase("2")) {
                 AccountBiz.addAccount();
-                continue;
             }
 
-            else if(choice.equalsIgnoreCase("q"))
+            else if(choice.equalsIgnoreCase("q")) {
                 break;
+            }
+            else {
+                System.out.println("Command not recognized");
+            }
         }
     }
 }

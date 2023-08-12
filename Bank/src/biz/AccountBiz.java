@@ -8,7 +8,7 @@ import java.util.*;
 public class AccountBiz {
     private static int generatedAccountId;
 
-    public static void addAccount() {
+    public static void addAccount() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
         int accountId = generateAccountId();
@@ -45,21 +45,19 @@ public class AccountBiz {
         return generatedAccountId;
     }
 
-    public static String generateAccountNumber(int ownerId, int accountId) {
-        String accountNumber = null;
-        for(Customer customer: Data.customers) {
-            if (customer.getId() == ownerId) {
-                String firstPart = String.valueOf(ownerId % 10);
-                String secondPart = customer.getNationalId().substring(0, 6);
-                String thirdPart = String.valueOf(accountId % 10);
-                long leftLimit = 10000000L;
-                long rightLimit = 100000000L;
-                long generatedLong = leftLimit + (long)(Math.random() * (rightLimit - leftLimit));
-                String lastPart = String.valueOf(generatedLong);
-                accountNumber = firstPart + secondPart + thirdPart + lastPart;
-            }
+    public static String generateAccountNumber(int ownerId, int accountId) throws Exception {
+        Customer customer = CustomerBiz.findCustomerById(ownerId);
+        if(customer == null) {
+            throw new Exception("Customer ID not found");
         }
-        return accountNumber;
+        String firstPart = String.valueOf(ownerId % 10);
+        String secondPart = customer.getNationalId().substring(0, 6);
+        String thirdPart = String.valueOf(accountId % 10);
+        long leftLimit = 10000000L;
+        long rightLimit = 100000000L;
+        long generatedLong = leftLimit + (long)(Math.random() * (rightLimit - leftLimit));
+        String lastPart = String.valueOf(generatedLong);
+        return firstPart + secondPart + thirdPart + lastPart;
     }
 
     public static boolean validateId(int ownerId) {
@@ -69,5 +67,14 @@ public class AccountBiz {
             }
         }
         return false;
+    }
+
+    public static Account findAccountById(int accountId) {
+        for(Account account: Data.accounts) {
+            if (account.getAccountId() == accountId) {
+                return account;
+            }
+        }
+        return null;
     }
 }
