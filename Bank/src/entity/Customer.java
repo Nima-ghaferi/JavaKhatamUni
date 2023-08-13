@@ -5,12 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer {
-    // fields
     private int Id;
     private String firstName;
     private String lastName;
     private  Date birthDate;
-
     private String nationalId;
     private String mobileNumber;
     private String address;
@@ -18,17 +16,15 @@ public class Customer {
     private String nationality;
 
 
-    // getter and setter methods
     public int getId() {
-        return Id;
+        return this.Id;
     }
-
     public void setId(int id) {
         this.Id = id;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -36,7 +32,7 @@ public class Customer {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -44,7 +40,7 @@ public class Customer {
     }
 
     public Date getBirthDate() {
-        return birthDate;
+        return this.birthDate;
     }
 
     public void setBirthDate(Date birthDate) {
@@ -52,7 +48,7 @@ public class Customer {
     }
 
     public String getNationalId() {
-        return nationalId;
+        return this.nationalId;
     }
 
     public void setNationalId(String nationalId) {
@@ -60,7 +56,7 @@ public class Customer {
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
+        return this.mobileNumber;
     }
 
     public void setMobileNumber(String mobileNumber) {
@@ -68,7 +64,7 @@ public class Customer {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -76,7 +72,7 @@ public class Customer {
     }
 
     public String getEmailAddress() {
-        return emailAddress;
+        return this.emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -84,7 +80,7 @@ public class Customer {
     }
 
     public String getNationality() {
-        return nationality;
+        return this.nationality;
     }
 
     public void setNationality(String nationality) {
@@ -92,7 +88,6 @@ public class Customer {
     }
 
 
-    // constructor
     public Customer(int Id, String firsName, String lastName, Date birthDate, String nationalId,
                     String mobileNumber, String address, String emailAddress, String nationality){
         this.Id = Id;
