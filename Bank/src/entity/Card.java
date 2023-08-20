@@ -7,7 +7,7 @@ public class Card {
     private String cardPAN;
     private String password;
     private Date createDate;
-    private Date expireDate;
+    private Date expirationDate;
     private String cvv2;
     private Customer cardHolder;
     private Account defaultAccount;
@@ -38,12 +38,20 @@ public class Card {
         this.password = password;
     }
 
-    public Date getExpireDate() {
-        return expireDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
     }
 
     public String getCvv2() {
@@ -86,10 +94,12 @@ public class Card {
         this.state = state;
     }
 
-    public Card(int cardId, String cardPAN, String password, Date expireDate, String cvv2, Customer cardHolder, Account defaultAccount, CardType cardType, CardState state) {
+    public Card(int cardId, String cardPAN, String password,Date createDate, Date expireDate, String cvv2, Customer cardHolder, Account defaultAccount, CardType cardType, CardState state) {
+        this.cardId = cardId;
+        this.createDate = createDate;
         this.cardPAN = cardPAN;
         this.password = password;
-        this.expireDate = expireDate;
+        this.expirationDate = expireDate;
         this.cvv2 = cvv2;
         this.cardHolder = cardHolder;
         this.defaultAccount = defaultAccount;

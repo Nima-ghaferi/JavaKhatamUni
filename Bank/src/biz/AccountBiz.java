@@ -46,7 +46,7 @@ public class AccountBiz {
     }
 
     public static String generateAccountNumber(int ownerId, int accountId) throws Exception {
-        Customer customer = CustomerBiz.findCustomerById(ownerId);
+        Customer customer = CustomerBiz.findById(ownerId);
         if(customer == null) {
             throw new Exception("Customer ID not found");
         }
@@ -69,7 +69,7 @@ public class AccountBiz {
         return false;
     }
 
-    public static Account findAccountById(int accountId) {
+    public static Account findById(int accountId) {
         for(Account account: Data.accounts) {
             if (account.getAccountId() == accountId) {
                 return account;
