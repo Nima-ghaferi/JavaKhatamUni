@@ -26,6 +26,10 @@ public class Main {
                 AccountBiz.addAccount();
             }
 
+            else if(choice.equalsIgnoreCase("3")) {
+                CardBiz.addCard();
+            }
+
             else if(choice.equalsIgnoreCase("q")) {
                 break;
             }

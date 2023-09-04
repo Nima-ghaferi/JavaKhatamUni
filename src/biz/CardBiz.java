@@ -3,13 +3,12 @@ package biz;
 import entity.*;
 import main.Data;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class CardBiz {
     private static int generatedCardId = 0;
     private static List<String> generatedCardPANs = new ArrayList<>();
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public static void addCard() {
         Scanner scanner = new Scanner(System.in);
@@ -18,29 +17,30 @@ public class CardBiz {
 
         String cardPassword = generateCardPassword();
 
-        Date cardCreationDate = Date.from(LocalDate.now().atStartOfDay()
-                .atZone(java.time.ZoneId.systemDefault())
-                .toInstant());
+        Date cardCreationDate = new Date();
 
         Date cardExpirationDate = getExpirationDate(cardCreationDate);
 
         String CardCvv2 = generateCVV2();
 
-        System.out.print("Enter card holder for card: ");
+        System.out.print("Enter card holder id: ");
         Customer cardHolder = CustomerBiz.findById(scanner.nextInt());
 
         System.out.print("Enter account id: ");
-        Account defaultAccount = AccountBiz.findById(scanner.nextInt());
+        Account cardDefaultaccount = AccountBiz.findById(scanner.nextInt());
 
-        assert defaultAccount != null;
-        String cardPAN = generateCardPAN(Integer.parseInt(defaultAccount.getAccountNumber()));
+        String cardPAN = generateCardPAN(Integer.parseInt(cardDefaultaccount.getAccountNumber()));
 
         System.out.println("Card Types:");
         System.out.println("1. Debit");
         System.out.print("Choose type of card: ");
         int choice = scanner.nextInt();
+        CardType cardType = null;
         if(choice == 1) {
-            CardType cardType = CardType.DEBIT;
+             cardType = CardType.DEBIT;
+        }
+        else{
+            System.out.println("invalid input!");
         }
 
         System.out.println("Card States: ");
@@ -49,15 +49,21 @@ public class CardBiz {
         System.out.println("3. Expire");
         System.out.print("Choose state of card: ");
         choice = scanner.nextInt();
+        CardState cardStatus = null;
         if(choice == 1){
-            CardState cardStatus = CardState.ACTIVE;
+             cardStatus = CardState.ACTIVE;
         }
-        if(choice == 2){
-            CardState cardStatus = CardState.HOT;
+        else if(choice == 2){
+            cardStatus = CardState.HOT;
         }
-        if(choice == 3){
-            CardState cardStatus = CardState.EXPIRE;
+        else if(choice == 3){
+            cardStatus = CardState.EXPIRE;
         }
+        else{
+            System.out.println("invalid input!");
+        }
+
+        Data.cards.add(new Card(cardId, cardPAN, cardPassword, cardCreationDate, cardExpirationDate, CardCvv2, cardHolder, cardDefaultaccount, cardType, cardStatus));
 
     }
 
@@ -74,13 +80,13 @@ public class CardBiz {
     }
 
     private static String generateCardPAN(int accountNumber){
-        String generatedCardPAN = getRandomCardPAN(accountNumber);
-        if (generatedCardPANs.contains(generatedCardPAN)) {
-            do generatedCardPAN = getRandomCardPAN(accountNumber);
-            while (generatedCardPANs.contains(generatedCardPAN));
-        }
+        String generatedCardPAN;
+        do generatedCardPAN = getRandomCardPAN(accountNumber);
+        while (generatedCardPANs.contains(generatedCardPAN));
+        generatedCardPANs.add(generatedCardPAN);
         return generatedCardPAN;
     }
+
     private static String generateCardPassword() {
         int password = random.nextInt(10000);
         return String.format("%04d", password);
