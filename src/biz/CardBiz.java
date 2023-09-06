@@ -3,6 +3,7 @@ package biz;
 import entity.*;
 import main.Data;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class CardBiz {
@@ -29,7 +30,10 @@ public class CardBiz {
         System.out.print("Enter account id: ");
         Account cardDefaultaccount = AccountBiz.findById(scanner.nextInt());
 
-        String cardPAN = generateCardPAN(Integer.parseInt(cardDefaultaccount.getAccountNumber()));
+        String cardPAN = null;
+        if (cardDefaultaccount != null) {
+            cardPAN = generateCardPAN(Integer.parseInt(cardDefaultaccount.getAccountNumber()));
+        }
 
         System.out.println("Card Types:");
         System.out.println("1. Debit");
@@ -65,6 +69,26 @@ public class CardBiz {
 
         Data.cards.add(new Card(cardId, cardPAN, cardPassword, cardCreationDate, cardExpirationDate, CardCvv2, cardHolder, cardDefaultaccount, cardType, cardStatus));
 
+    }
+    public static BigDecimal getBalance(){
+        System.out.println("Enter card PAN: ");
+        Scanner scanner = new Scanner(System.in);
+        String cardPAN = scanner.next();
+
+        Card card = CardBiz.findByPAN(cardPAN);
+        if(card != null) {
+            System.out.println("Enter card password: ");
+            if(checkPassword(card, scanner.next())){
+                return card.getDefaultAccount().getBalance();
+            }
+            else{
+                System.out.println("Password is invalid!");
+            }
+        }
+        else{
+            System.out.println("Card PAN is invalid!");
+        }
+        return null;
     }
 
     private static int generateCardId() {
@@ -102,6 +126,19 @@ public class CardBiz {
         calendar.setTime(createDate);
         calendar.add(Calendar.YEAR, 5);
         return calendar.getTime();
+    }
+
+    public static Card findByPAN(String cardPAN) {
+        for(Card card: Data.cards) {
+            if (card.getCardPAN().equalsIgnoreCase(cardPAN)) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public static boolean checkPassword(Card card, String password){
+        return card.getPassword().equalsIgnoreCase(password);
     }
 }
 
