@@ -1,5 +1,6 @@
 package entity;
 
 public enum CardType {
-    DEBIT
+    DEBIT,
+    CREDIT
 }
