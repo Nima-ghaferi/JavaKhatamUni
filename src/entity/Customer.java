@@ -1,11 +1,9 @@
 package entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Customer {
-    private int Id;
+    private int id;
     private String firstName;
     private String lastName;
     private  Date birthDate;
@@ -17,10 +15,10 @@ public class Customer {
 
 
     public int getId() {
-        return this.Id;
+        return this.id;
     }
     public void setId(int id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -88,10 +86,10 @@ public class Customer {
     }
 
 
-    public Customer(int Id, String firsName, String lastName, Date birthDate, String nationalId,
+    public Customer(int id, String firstName, String lastName, Date birthDate, String nationalId,
                     String mobileNumber, String address, String emailAddress, String nationality){
-        this.Id = Id;
-        this.firstName = firsName;
+        this.id = id;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.nationalId = nationalId;
