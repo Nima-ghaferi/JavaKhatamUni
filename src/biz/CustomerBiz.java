@@ -9,12 +9,17 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class CustomerBiz {
-    private static int generatedCustomerId;
+    private static int customerId;
 
-    public static void addCustomer() {
+    static {
+        customerId = 0;
+    }
+
+    public static void addCustomer() throws ParseException {
         Scanner scanner = new Scanner(System.in);
 
         int customerId = generateCustomerId();
+        System.out.println("Customer ID: " + customerId);
 
         System.out.print("Enter customer first name: ");
         String customerFirstName = scanner.next();
@@ -22,14 +27,8 @@ public class CustomerBiz {
         System.out.print("Enter customer last name: ");
         String customerLastName = scanner.next();
 
-        System.out.print("Enter customer birth date(dd/MM/yyyy): ");
-        Date customerBirthDate = null;
-        try {
-            customerBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.next());
-        } catch (ParseException e) {
-            System.out.println("This is invalid birthDate!");
-            System.out.println("Enter again!");
-        }
+        System.out.print("Enter customer birth date(yyyy/MM//dd): ");
+        Date customerBirthDate = new SimpleDateFormat("yyyy/MM//dd").parse(scanner.next());
 
         System.out.print("Enter customer nationality: ");
         String customerNationality = scanner.next();
@@ -60,7 +59,7 @@ public class CustomerBiz {
     }
 
     public static int generateCustomerId(){
-        generatedCustomerId++;
-        return generatedCustomerId;
+        customerId++;
+        return customerId;
     }
 }
