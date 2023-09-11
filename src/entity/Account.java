@@ -1,63 +1,60 @@
 package entity;
 import java.math.BigDecimal;
-import java.util.*;
-import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Account {
-    private int accountId;
+    private int id;
     private String accountNumber;
-    private BigDecimal balance;
+    private List<Customer> owners = new ArrayList<>();
     private Date openingDate;
-    private List<Integer> customerIdList = new ArrayList<>();
+    private BigDecimal balance;
     private BigDecimal minAmount;
-    private int ownerId;
 
-    public Account(String accountNumber, Date openingDate, BigDecimal minAmount, int ownerId, int accountId) {
+    public Account(int id, String accountNumber, List<Customer> owners, Date openingDate, BigDecimal minAmount) {
+        this.id = id;
         this.accountNumber = accountNumber;
-        this.balance = minAmount;
         this.openingDate = openingDate;
+        this.balance = minAmount;
         this.minAmount = minAmount;
-        this.ownerId = ownerId;
-        this.accountId = accountId;
-        customerIdList.add(ownerId);
+        this.owners = owners;
     }
 
-    public Account() {}
+    public Account() {
 
-    public int getAccountId() {
-        return this.accountId;
     }
 
-    public void setAccountId(int newAccountId) {
-        this.accountId = newAccountId;
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAccountNumber() {
         return this.accountNumber;
     }
 
-    public void setAccountNumber(String newAccountNumber) {
-        this.accountNumber = newAccountNumber;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public Date getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(Date newOpeningDate) {
-        this.openingDate = newOpeningDate;
-    }
-
-    public int getOwnerId() {
-        return this.ownerId;
-    }
-
-    public void setOwnerId(int newOwnerId) {
-        this.ownerId = newOwnerId;
+    public void setOpeningDate(Date openingDate) {
+        this.openingDate = openingDate;
     }
 
     public BigDecimal getBalance() {
         return this.balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public BigDecimal getMinAmount() {
@@ -68,10 +65,11 @@ public class Account {
         this.minAmount = minAmount;
     }
 
-    public List<Integer> getCustomerIdList() {
-        return this.customerIdList;
+    public List<Customer> getOwners() {
+        return owners;
     }
 
-
-
+    public void setOwners(List<Customer> owners) {
+        this.owners = owners;
+    }
 }
