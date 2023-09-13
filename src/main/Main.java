@@ -31,10 +31,11 @@ public class Main {
             }
 
             else if(choice.equalsIgnoreCase("4")) {
-                CardBiz.getBalance();
+                System.out.println(CardBiz.getBalance());
             }
 
             else if(choice.equalsIgnoreCase("q")) {
+                System.out.println("Exiting program...");
                 break;
             }
             else {
