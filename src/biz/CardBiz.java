@@ -17,6 +17,26 @@ public class CardBiz {
         random = new Random();
     }
 
+    public static void cardRenewal() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the CardPAN: ");
+        String cardPAN = scanner.next();
+        while (findByPAN(scanner.nextLine()) == null) {
+            System.out.print("CardPAN not recognized, renter the CardPAN: ");
+            cardPAN = scanner.next();
+        }
+
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+        while(!checkPassword(findByPAN(cardPAN), password)) {
+            System.out.print("Wrong password, renter the password: ");
+            password = scanner.next();
+        }
+
+        Date renewalDate = generateExpiryDate(findByPAN(cardPAN).getExpiryDate());
+    }
+
     public static void addCard() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
