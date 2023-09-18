@@ -13,7 +13,7 @@ public class Main {
             System.out.println("3. Add card");
             System.out.println("4. Get balance");
             System.out.println("5.");
-            System.out.println("6.");
+            System.out.println("6. Change card state");
             System.out.println("q. Quit");
             System.out.println("-----------------------------");
             String choice = scanner.next();
@@ -34,6 +34,9 @@ public class Main {
                 System.out.println(CardBiz.getBalance());
             }
 
+            else if(choice.equalsIgnoreCase("6")){
+                CardBiz.changeCardState();
+            }
             else if(choice.equalsIgnoreCase("q")) {
                 System.out.println("Exiting program...");
                 break;

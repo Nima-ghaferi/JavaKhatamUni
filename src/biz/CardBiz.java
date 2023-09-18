@@ -123,6 +123,33 @@ public class CardBiz {
             throw new Exception();
         }
     }
+
+    public static void changeCardState() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter PAN of card: ");
+        Card card = findByPAN(scanner.next());
+        if(card == null){
+            throw new Exception();
+        }
+        System.out.println("Card States:");
+        System.out.println("1. Active");
+        System.out.println("2. Hot");
+        System.out.println("3. Expire");
+        System.out.print("New card state: ");
+        String choice = scanner.next();
+        if(choice.equalsIgnoreCase("1")){
+            card.setState(CardState.ACTIVE);
+        }
+        else if(choice.equalsIgnoreCase("2")){
+            card.setState(CardState.HOT);
+        }
+        else if(choice.equalsIgnoreCase("3")){
+            card.setState(CardState.EXPIRE);
+        }
+        else{
+            throw new Exception();
+        }
+    }
     private static int generateCardId() {
         cardId++;
         return cardId;
