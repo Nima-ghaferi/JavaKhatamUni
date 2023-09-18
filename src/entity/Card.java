@@ -3,31 +3,31 @@ package entity;
 import java.util.Date;
 
 public class Card {
-    private int cardId;
-    private String cardPAN;
+    private int id;
+    private String PAN;
     private String password;
-    private Date createDate;
-    private Date expirationDate;
+    private Date creationDate;
+    private Date expiryDate;
     private String cvv2;
-    private Customer cardHolder;
-    private Account defaultAccount;
-    private CardType cardType;
+    private Customer holder;
+    private Account account;
+    private CardType type;
     private CardState state;
 
-    public int getCardId() {
-        return cardId;
+    public int getId() {
+        return id;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCardPAN() {
-        return cardPAN;
+    public String getPAN() {
+        return PAN;
     }
 
-    public void setCardPAN(String cardPAN) {
-        this.cardPAN = cardPAN;
+    public void setPAN(String PAN) {
+        this.PAN = PAN;
     }
 
     public String getPassword() {
@@ -38,20 +38,20 @@ public class Card {
         this.password = password;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public Date getExpiryDate() {
+        return expiryDate;
     }
 
     public String getCvv2() {
@@ -62,28 +62,28 @@ public class Card {
         this.cvv2 = cvv2;
     }
 
-    public Customer getCardHolder() {
-        return cardHolder;
+    public Customer getHolder() {
+        return holder;
     }
 
-    public void setCardHolder(Customer cardHolder) {
-        this.cardHolder = cardHolder;
+    public void setHolder(Customer holder) {
+        this.holder = holder;
     }
 
-    public Account getDefaultAccount() {
-        return defaultAccount;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setDefaultAccount(Account defaultAccount) {
-        this.defaultAccount = defaultAccount;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public CardType getCardType() {
-        return cardType;
+    public CardType getType() {
+        return type;
     }
 
-    public void setCardType(CardType cardType) {
-        this.cardType = cardType;
+    public void setType(CardType type) {
+        this.type = type;
     }
 
     public CardState getState() {
@@ -94,16 +94,17 @@ public class Card {
         this.state = state;
     }
 
-    public Card(int cardId, String cardPAN, String password,Date createDate, Date expireDate, String cvv2, Customer cardHolder, Account defaultAccount, CardType cardType, CardState state) {
-        this.cardId = cardId;
-        this.createDate = createDate;
-        this.cardPAN = cardPAN;
+    public Card(int id, String PAN, String password, Date creationDate, Date expireDate, String cvv2,
+                Customer holder, Account account, CardType type, CardState state) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.PAN = PAN;
         this.password = password;
-        this.expirationDate = expireDate;
+        this.expiryDate = expireDate;
         this.cvv2 = cvv2;
-        this.cardHolder = cardHolder;
-        this.defaultAccount = defaultAccount;
-        this.cardType = cardType;
+        this.holder = holder;
+        this.account = account;
+        this.type = type;
         this.state = state;
     }
 }

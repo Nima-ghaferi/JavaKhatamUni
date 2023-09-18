@@ -6,58 +6,82 @@ import main.Data;
 import java.math.BigDecimal;
 import java.util.*;
 public class AccountBiz {
-    private static int generatedAccountId;
+    private static int accountId;
 
     public static void addAccount() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
         int accountId = generateAccountId();
+        System.out.println("Account ID: " + accountId);
+
+        Date accountOpeningDate = new Date();
+        System.out.println("Opening Date of account: " + accountOpeningDate);
+
+        System.out.println("Choose type of account: ");
+        System.out.println("1. Individual");
+        System.out.println("2. Joint");
+        String choice = scanner.next();
+        AccountType accountType;
+        if(choice.equalsIgnoreCase("1")){
+            accountType = AccountType.INDIVIDUAL;
+        }
+        else if(choice.equalsIgnoreCase("2")){
+            accountType = AccountType.JOINT;
+        }
+        else{
+            throw new Exception();
+        }
+
+
+        List<Customer> accountOwners = new ArrayList<>();
+        if(accountType == AccountType.INDIVIDUAL){
+            System.out.print("Enter ID of owner of account: ");
+            int accountOwnerID = scanner.nextInt();
+            if(validateId(accountOwnerID)){
+                accountOwners.add(CustomerBiz.findById(accountOwnerID));
+            }
+            else{
+                throw new Exception();
+            }
+        }
+        else if(accountType == AccountType.JOINT){
+            System.out.print("Enter ID of owners for account(split by comma): ");
+            String[] accountOwnerIDs = scanner.next().split(",");
+            for(String id : accountOwnerIDs){
+                if(validateId(Integer.parseInt(id.trim()))){
+                    accountOwners.add(CustomerBiz.findById(Integer.parseInt(id.trim())));
+                }
+                else{
+                    throw new Exception();
+                }
+            }
+        }
 
         System.out.print("Enter the minimum balance of credit for account: ");
         BigDecimal minAmount = scanner.nextBigDecimal();
 
-        Date openingDate = new Date();
+        String accountNumber = generateAccountNumber(accountOwners, accountId);
 
-        System.out.print("Enter the ID of the owner of the account: ");
-        int ownerId = scanner.nextInt();
-        while(true) {
-            try {
-                if(validateId(ownerId)) {
-                    break;
-                } else {
-                    throw new Exception();
-                }
-            } catch(Exception e) {
-                System.out.print("Invalid ID, enter a valid ID: ");
-                ownerId = scanner.nextInt();
-            }
-        }
-
-        String accountNumber = generateAccountNumber(ownerId, accountId);
-
-        Data.accounts.add(new Account(accountNumber, openingDate, minAmount, ownerId, accountId));
-
-
+        Data.accounts.add(new Account(accountId, accountNumber, accountType, accountOwners, accountOpeningDate, minAmount));
     }
 
     public static int generateAccountId(){
-        generatedAccountId++;
-        return generatedAccountId;
+        accountId++;
+        return accountId;
     }
 
-    public static String generateAccountNumber(int ownerId, int accountId) throws Exception {
-        Customer customer = CustomerBiz.findById(ownerId);
-        if(customer == null) {
-            throw new Exception("Customer ID not found");
+    public static String generateAccountNumber(List<Customer> owners, int accountId) {
+        StringBuilder firstPart = new StringBuilder();
+        for(Customer owner : owners){
+            firstPart.append(String.format("%02d", owner.getId() % 100));
         }
-        String firstPart = String.valueOf(ownerId % 10);
-        String secondPart = customer.getNationalId().substring(0, 6);
-        String thirdPart = String.valueOf(accountId % 10);
-        long leftLimit = 10000000L;
-        long rightLimit = 100000000L;
+        String secondPart = String.format("%02d", accountId % 100);
+        int digit = 16 - (owners.size() + 1) * 2;
+        long leftLimit = (long) Math.pow(10, digit);
+        long rightLimit = (long) Math.pow(10, digit + 1);
         long generatedLong = leftLimit + (long)(Math.random() * (rightLimit - leftLimit));
-        String lastPart = String.valueOf(generatedLong);
-        return firstPart + secondPart + thirdPart + lastPart;
+        String thirdPart = String.valueOf(generatedLong);
+        return firstPart + secondPart + thirdPart;
     }
 
     public static boolean validateId(int ownerId) {
@@ -71,7 +95,7 @@ public class AccountBiz {
 
     public static Account findById(int accountId) {
         for(Account account: Data.accounts) {
-            if (account.getAccountId() == accountId) {
+            if (account.getId() == accountId) {
                 return account;
             }
         }

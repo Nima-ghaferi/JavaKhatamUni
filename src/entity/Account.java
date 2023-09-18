@@ -7,14 +7,16 @@ import java.util.List;
 public class Account {
     private int id;
     private String accountNumber;
+    private AccountType type;
     private List<Customer> owners = new ArrayList<>();
     private Date openingDate;
     private BigDecimal balance;
     private BigDecimal minAmount;
 
-    public Account(int id, String accountNumber, List<Customer> owners, Date openingDate, BigDecimal minAmount) {
+    public Account(int id, String accountNumber, AccountType type, List<Customer> owners, Date openingDate, BigDecimal minAmount) {
         this.id = id;
         this.accountNumber = accountNumber;
+        this.type = type;
         this.openingDate = openingDate;
         this.balance = minAmount;
         this.minAmount = minAmount;
@@ -39,6 +41,14 @@ public class Account {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
     }
 
     public Date getOpeningDate() {
