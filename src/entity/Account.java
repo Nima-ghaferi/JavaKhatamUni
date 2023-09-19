@@ -82,4 +82,15 @@ public class Account {
     public void setOwners(List<Customer> owners) {
         this.owners = owners;
     }
+
+    public void withdraw(BigDecimal amount) throws Exception {
+        if(this.balance.subtract(amount).compareTo(this.minAmount) >= 0){
+            this.setBalance(this.balance.subtract(amount));
+        }
+        throw new Exception();
+    }
+
+    public void deposit(BigDecimal amount){
+        this.setBalance(this.balance.add(amount));
+    }
 }
