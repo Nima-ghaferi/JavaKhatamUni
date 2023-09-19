@@ -150,6 +150,59 @@ public class CardBiz {
             throw new Exception();
         }
     }
+
+    public static void cardByCard() throws Exception {
+        Scanner scanner = new Scanner((System.in));
+        System.out.println("::::Source Card::::");
+        System.out.print("Enter PAN of card: ");
+        Card sourceCard = findByPAN(scanner.next());
+        if(sourceCard == null){
+            throw new Exception();
+        }
+        Calendar sourceCardExpiryDate = Calendar.getInstance();
+        sourceCardExpiryDate.setTime(sourceCard.getExpiryDate());
+
+        System.out.print("Enter year of expiry date for card: ");
+        String sourceCardYearExpiryDate = scanner.next();
+        if(sourceCardYearExpiryDate == null){
+            throw new Exception();
+        }
+        if(Integer.parseInt(sourceCardYearExpiryDate) != sourceCardExpiryDate.get(Calendar.YEAR)){
+            throw new Exception();
+        }
+
+        System.out.print("Enter month of expiry date for card: ");
+        String sourceCardMonthExpiryDate = scanner.next();
+        if(sourceCardMonthExpiryDate == null){
+            throw new Exception();
+        }
+        if(Integer.parseInt(sourceCardMonthExpiryDate) != sourceCardExpiryDate.get(Calendar.MONTH)){
+            throw new Exception();
+        }
+
+        System.out.print("Enter cvv2 for card: ");
+        String sourceCardCvv2 = scanner.next();
+        if(sourceCardCvv2 == null){
+            throw new Exception();
+        }
+        if(sourceCardCvv2.equals(sourceCard.getCvv2())){
+            throw new Exception();
+        }
+
+        System.out.println("::::Destination Card::::");
+        System.out.print("Enter PAN of card: ");
+        Card destinationCard = findByPAN(scanner.next());
+        if(destinationCard == null){
+            throw new Exception();
+        }
+
+        System.out.print("Enter amount of money: ");
+        BigDecimal amount = scanner.nextBigDecimal();
+        sourceCard.getAccount().withdraw(amount);
+        destinationCard.getAccount().deposit(amount);
+        System.out.println("Transfer successfully done.");
+    }
+
     private static int generateCardId() {
         cardId++;
         return cardId;
